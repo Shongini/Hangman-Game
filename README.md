@@ -1,7 +1,8 @@
 # Hangman-Game  
-"Games with well-known Polish proverb"
+"Games with well-known Polish proverb" - In update process....
 Download files,
 Unpack "img.rar" to "img" folder,
 Turn on "szubienica.html",
 Enjoy it,
 Thanks...
+
