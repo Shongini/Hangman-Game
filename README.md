@@ -2,7 +2,7 @@
 
 A modern, fully responsive version of the classic "Hangman" game, designed for a premium gameplay experience. It teaches and entertains, offering rich categories, multiple difficulty levels, and statistics tracking.
 
-![Hangman Preview](https://via.placeholder.com/800x400.png?text=Hangman+Game+v2.0.1)
+![Hangman Preview](hangman_preview.jpg)
 
 ## 🌟 Features
 
