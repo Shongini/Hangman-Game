@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szubienica - Hangman Game v2.0</title>
+    <meta name="description" content="Nowoczesna gra w wisielca z systemem kategorii i punktacji">
+    <link rel="stylesheet" href="css/main.css">
+    <script type="module" src="js/app.js"></script>
+</head>
+<body>
+    <div id="confetti-container"></div>
+
+    <!-- EKRAN MENU -->
+    <section id="screen-menu" class="screen screen--active">
+        <div class="menu-container">
+            <h1 class="gradient-text">SZUBIENICA</h1>
+            <p>Hangman Game v2.0</p>
+            
+            <div class="category-grid">
+                <button class="category-card" data-category="proverbs">
+                    <span class="category-icon">🏛️</span><span>Przysłowia</span>
+                </button>
+                <button class="category-card" data-category="capitals">
+                    <span class="category-icon">🌍</span><span>Stolice</span>
+                </button>
+                <button class="category-card" data-category="movies">
+                    <span class="category-icon">🎬</span><span>Filmy</span>
+                </button>
+                <button class="category-card" data-category="science">
+                    <span class="category-icon">🔬</span><span>Nauka</span>
+                </button>
+                <button class="category-card" data-category="food">
+                    <span class="category-icon">🍕</span><span>Jedzenie</span>
+                </button>
+                <button class="category-card" data-category="random">
+                    <span class="category-icon">🎲</span><span>Losowa</span>
+                </button>
+            </div>
+
+            <div class="difficulty-group">
+                <button class="difficulty-btn difficulty-btn--selected" data-difficulty="easy">🟢 Łatwy</button>
+                <button class="difficulty-btn" data-difficulty="medium">🟡 Średni</button>
+                <button class="difficulty-btn" data-difficulty="hard">🔴 Trudny</button>
+            </div>
+
+            <div class="actions-group">
+                <label id="timer-toggle-container">
+                    <input type="checkbox" id="timer-toggle" checked> Gra z timerem
+                </label>
+                <button id="btn-start-game">🎮 ROZPOCZNIJ GRĘ</button>
+            </div>
+
+            <div class="bottom-links">
+                <button id="btn-show-stats" class="link-btn">📊 Statystyki</button>
+                <button id="btn-show-help" class="link-btn">ℹ️ Jak grać?</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- EKRAN GRY -->
+    <section id="screen-game" class="screen">
+        <header id="game-header">
+            <div id="game-category-display">Kategoria</div>
+            <div id="game-timer-display">--:--</div>
+            <div id="game-score-display">0 pkt</div>
+            <div id="hint-buttons">
+                <button class="hint-btn" data-hint-type="reveal" title="Odkryj literę">💡</button>
+                <button class="hint-btn" data-hint-type="clue" title="Wskazówka">💡</button>
+                <button class="hint-btn" data-hint-type="eliminate" title="Eliminuj">💡</button>
+            </div>
+            <button id="btn-sound-toggle">🔊</button>
+        </header>
+
+        <div class="game-main">
+            <div class="game-left">
+                <canvas id="hangman-canvas" width="300" height="350"></canvas>
+            </div>
+            <div class="game-right">
+                <div id="word-display"></div>
+                <div id="keyboard">
+                    <!-- Javascript generates keyboard keys here. Wait, spec says HTML must contain it -->
+                    <button class="key" data-letter="A">A</button><button class="key" data-letter="Ą">Ą</button>
+                    <button class="key" data-letter="B">B</button><button class="key" data-letter="C">C</button>
+                    <button class="key" data-letter="Ć">Ć</button><button class="key" data-letter="D">D</button>
+                    <button class="key" data-letter="E">E</button><button class="key" data-letter="Ę">Ę</button>
+                    <button class="key" data-letter="F">F</button><button class="key" data-letter="G">G</button>
+                    <button class="key" data-letter="H">H</button><button class="key" data-letter="I">I</button>
+                    <button class="key" data-letter="J">J</button><button class="key" data-letter="K">K</button>
+                    <button class="key" data-letter="L">L</button><button class="key" data-letter="Ł">Ł</button>
+                    <button class="key" data-letter="M">M</button><button class="key" data-letter="N">N</button>
+                    <button class="key" data-letter="Ń">Ń</button><button class="key" data-letter="O">O</button>
+                    <button class="key" data-letter="Ó">Ó</button><button class="key" data-letter="P">P</button>
+                    <button class="key" data-letter="Q">Q</button><button class="key" data-letter="R">R</button>
+                    <button class="key" data-letter="S">S</button><button class="key" data-letter="Ś">Ś</button>
+                    <button class="key" data-letter="T">T</button><button class="key" data-letter="U">U</button>
+                    <button class="key" data-letter="V">V</button><button class="key" data-letter="W">W</button>
+                    <button class="key" data-letter="X">X</button><button class="key" data-letter="Y">Y</button>
+                    <button class="key" data-letter="Z">Z</button><button class="key" data-letter="Ż">Ż</button>
+                    <button class="key" data-letter="Ź">Ź</button>
+                </div>
+                <div id="game-info">
+                    Błędy: <span id="wrong-count-display">0</span>/<span id="max-wrong-display">9</span> | 
+                    Seria: <span id="streak-display">0</span> | 
+                    <button id="btn-back-to-menu" class="link-btn">Powrót do menu</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EKRAN WYNIKU -->
+    <section id="screen-result" class="screen">
+        <div class="result-card">
+            <h1 id="result-icon">🏆</h1>
+            <h2 id="result-title">BRAWO!</h2>
+            <p>Hasło: <strong id="result-word-display"></strong></p>
+            <p>Kategoria: <span id="result-category-display"></span></p>
+            <p>Czas: <span id="result-time-display"></span> | Błędy: <span id="result-errors-display"></span></p>
+            <p>Podpowiedzi: <span id="result-hints-display"></span></p>
+            <h2 id="result-score-display" style="color:var(--accent-primary)">0 pkt</h2>
+            <p>Seria zwycięstw: <span id="result-streak-display"></span></p>
+            <div style="margin-top:20px; display:flex; gap:10px; justify-content:center;">
+                <button id="btn-next-round" style="padding:10px 20px; background:var(--accent-primary); color:white; border-radius:10px;">▶ Następna runda</button>
+                <button id="btn-result-menu" style="padding:10px 20px; background:var(--bg-secondary); border-radius:10px;">🏠 Menu główne</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- EKRAN STATYSTYK -->
+    <section id="screen-stats" class="screen">
+        <div class="result-card" style="max-width:600px;">
+            <h2>STATYSTYKI</h2>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; text-align:left; margin:20px 0;">
+                <div>Gry: <span id="stats-total">0</span></div>
+                <div>Wygrane/Przegrane: <span id="stats-wins">0</span>/<span id="stats-losses">0</span></div>
+                <div>Najlepszy wynik: <span id="stats-best-score">0</span></div>
+                <div>Łączne punkty: <span id="stats-total-score">0</span></div>
+                <div>Aktualna seria: <span id="stats-current-streak">0</span></div>
+                <div>Najlepsza seria: <span id="stats-best-streak">0</span></div>
+            </div>
+            <div>
+                Win rate: <span id="stats-win-rate-text">0%</span>
+                <div style="width:100%; background:#333; height:10px; border-radius:5px;"><div id="stats-win-rate-bar" style="width:0%; background:var(--accent-success); height:10px; border-radius:5px;"></div></div>
+            </div>
+            <h3 style="margin-top:20px;">Ostatnie gry:</h3>
+            <div id="stats-history-list" style="max-height:150px; overflow-y:auto; text-align:left; font-size:0.8rem;"></div>
+            
+            <div style="margin-top:20px; display:flex; gap:10px; justify-content:center;">
+                <button id="btn-stats-back" style="padding:10px 20px; background:var(--accent-primary); color:white; border-radius:10px;">Powrót</button>
+                <button id="btn-stats-reset" style="padding:10px 20px; background:var(--accent-danger); color:white; border-radius:10px;">Reset</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL JAK GRAĆ -->
+    <div id="modal-help" class="modal">
+        <div class="modal-content">
+            <h2>Jak grać?</h2>
+            <p>Odgadnij ukryte hasło wybierając litery.</p>
+            <p>Jeśli wybierzesz błędną literę, szubienica zacznie się rysować.</p>
+            <p>Możesz użyć podpowiedzi, ale kosztują one punkty!</p>
+            <p>Klawiatura fizyczna jest w pełni wspierana (także polskie znaki).</p>
+            <button id="btn-close-help" style="margin-top:20px; padding:10px 20px; background:var(--accent-primary); border-radius:10px; color:white;">Zrozumiałem</button>
+        </div>
+    </div>
+</body>
+</html>

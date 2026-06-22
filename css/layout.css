@@ -1,0 +1,126 @@
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.screen--active {
+    display: flex;
+}
+
+/* Menu */
+#screen-menu .menu-container {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    background: rgba(26, 26, 62, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.difficulty-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.actions-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.bottom-links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Game */
+#screen-game {
+    justify-content: flex-start;
+}
+
+#game-header {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+}
+
+.game-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+#word-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+#keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 700px;
+}
+
+#game-info {
+    display: flex;
+    gap: 30px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 20px;
+}
+
+/* Responsiveness */
+@media (min-width: 768px) {
+    .category-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .game-main {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-around;
+    }
+    .game-left {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+    .game-right {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
