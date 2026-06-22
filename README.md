@@ -1,8 +1,8 @@
-# 🎮 Hangman Game v2.0 (Szubienica)
+# 🎮 Hangman Game v2.0.1 (Szubienica)
 
 Nowoczesna, w pełni responsywna wersja klasycznej gry w "Szubienicę", napisana z myślą o najwyższej jakości rozgrywce. Uczy i bawi, oferując rozbudowane kategorie, poziomy trudności oraz śledzenie statystyk.
 
-![Hangman Preview](https://via.placeholder.com/800x400.png?text=Hangman+Game+v2.0)
+![Hangman Preview](https://via.placeholder.com/800x400.png?text=Hangman+Game+v2.0.1)
 
 ## 🌟 Funkcjonalności
 
